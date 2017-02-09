@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 function CocktailsShow (props) {
-  const cocktail = props.cocktail;
+  const cocktail = props.cocktail
 
   if (!cocktail) {
-    return <div>'Loading...'</div>;
+    return <div>Loading...</div>
   }
 
   return (

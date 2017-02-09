@@ -1,8 +1,8 @@
 const BASE_URL = 'http://localhost:3000/api/v1'
+import axios from 'axios'
 
 export function fetchCocktails(){
-  const cocktails = fetch(`${BASE_URL}/cocktails`).then(res => res.json())
-
+  const cocktails =axios.get(`${BASE_URL}/cocktails`).then(res => res.data)
   return {
     type: 'FETCH_COCKTAILS',
     payload: cocktails
@@ -10,16 +10,18 @@ export function fetchCocktails(){
 }
 
 export function createCocktail(params){
-  const cocktail = fetch(`${BASE_URL}/cocktails`,
-    {method: 'POST',
-    body: JSON.stringify(params),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }});
-
+  const cocktail = axios.post(`${BASE_URL}/cocktails`,
+    params).then(response => response.data);
   return {
     type: 'CREATE_COCKTAIL',
-    payload: params.cocktail
+    payload: cocktail
+  }
+
+}
+
+export function updateCurrentCocktail(cocktail_id){
+  return {
+    type: 'UPDATE_CURRENT_COCKTAIL',
+    payload: cocktail_id
   }
 }
